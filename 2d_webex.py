@@ -1,5 +1,9 @@
 import requests
-import json
+
+def obtener_token():
+    url = 'https://webexapis.com/v1/people/me'
+    resp = requests.get(url, headers=encabezado)
+    return resp.status_code
 
 def listar_membresias(id_espacio):
     url = "https://webexapis.com/v1/memberships"
@@ -13,14 +17,19 @@ def listar_membresias(id_espacio):
 def enviar_mensaje(id_espacio):
     url = "https://webexapis.com/v1/messages"
     params = {"roomId": id_espacio, "markdown": "*** Enlace para el contenedor Docker ***"}
-    resp = requests.post(url, headers=encabezado, json=params)
+    requests.post(url, headers=encabezado, json=params)
 
 # Datos para todas las solicitudes
-token_acceso = "ZGUyM2U0Y2YtZmJkNi00NDZmLWFjZDAtZGFlMzdhNjUzYTNkYzExM2E0ZWEtY2Ri_P0A1_242b07f9-2b66-4cc2-9f6c-81cb45ce0742"
+token_acceso = "OTNiOTVkM2UtNzQ1Zi00MDAxLWI3MzUtNWI2ODdjNWY2NDUzOWU0MWI3NGEtY2Jl_P0A1_242b07f9-2b66-4cc2-9f6c-81cb45ce0742"
 encabezado = {"Authorization": "Bearer {}".format(token_acceso), "Content-Type": "application/json"}
 titulo = "Devnet-GroupDeltaBeta"
 
-# Solicutud para listar los espacios existentes
+# Si el token no es válido, obtenerlo por teclado
+if obtener_token() == 401:
+    token_acceso = input("Token? ")
+    encabezado = {"Authorization": "Bearer {}".format(token_acceso), "Content-Type": "application/json"}
+
+# Solicitud para listar los espacios existentes  
 url = "https://webexapis.com/v1/rooms"
 params = {"max": 100}
 resp = requests.get(url, headers=encabezado, params=params)
