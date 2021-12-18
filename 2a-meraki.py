@@ -1,5 +1,5 @@
 import requests
-api_key_meraki = "c3dc95792c4fab45fff0a83e9c28f1ae453473b4"
+api_key_meraki = "29eb58d73cc5f731afa67fa8e2aac2aa44084949"
 
 def opcion1():
     #encontrando nuestra org id, si existe mostrarla, si no crear la org
@@ -13,6 +13,8 @@ def opcion1():
     }
 
     response = requests.request('GET', url, headers=headers, data = payload)
+    print("Respuesta:")
+    print(response.status_code)
     #print(response.text.encode('utf8'))
     orgs = response.json()
     for org in orgs:
@@ -46,6 +48,7 @@ def opcion2():
         "X-Cisco-Meraki-API-Key": api_key_meraki
     }
     response = requests.request('GET', url, headers=headers, data = payload)
+    print(response.status_code)
     #print(response.text.encode('utf8'))
     orgs = response.json()
     for org in orgs:
@@ -87,8 +90,10 @@ def opcion2():
                     "X-Cisco-Meraki-API-Key": api_key_meraki
                 }
                 response = requests.request('DELETE', url, headers=headers, data = payload)
+                print(response.status_code)
                 #print(response.text.encode('utf8'))
                 print("Red borrada")
+        
 #creando la network
     payload = '''{
         "name": "Network-Delta",
