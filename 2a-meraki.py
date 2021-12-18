@@ -114,6 +114,7 @@ def opcion2():
     return
 def opcion3():
     opcion=input("Introducir el nuevo API KEY:")
+    global api_key_meraki
     api_key_meraki=opcion 
 
 while True: 
