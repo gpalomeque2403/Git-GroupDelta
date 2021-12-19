@@ -16,13 +16,13 @@ def listar_membresias(id_espacio):
 
 def enviar_mensaje(id_espacio):
     url = "https://webexapis.com/v1/messages"
-    params = {"roomId": id_espacio, "markdown": "*** Enlace para el contenedor Docker ***"}
+    params = {"roomId": id_espacio, "markdown": "https://hub.docker.com/repository/docker/tano2403/shell-groupdelta"}
     requests.post(url, headers=encabezado, json=params)
 
 # Datos para todas las solicitudes
 token_acceso = "OTNiOTVkM2UtNzQ1Zi00MDAxLWI3MzUtNWI2ODdjNWY2NDUzOWU0MWI3NGEtY2Jl_P0A1_242b07f9-2b66-4cc2-9f6c-81cb45ce0742"
 encabezado = {"Authorization": "Bearer {}".format(token_acceso), "Content-Type": "application/json"}
-titulo = "Devnet-GroupDeltaBeta"
+titulo = "Devnet-GroupDelta"
 
 # Si el token no es válido, obtenerlo por teclado
 if obtener_token() == 401:
@@ -50,7 +50,7 @@ if num_esps == 0:
     
     # Solicitud para las membresías
     url = "https://webexapis.com/v1/memberships"
-    correos = ("amendozag88@gmail.com", "gpalomeque123@gmail.com", "jvonlandwust@doc.ulasalle.edu.bo", "diego.zumelzu18@gmail.com") #", rcsa@hotmail.com")
+    correos = ("amendozag88@gmail.com", "gpalomeque123@gmail.com", "jvonlandwust@doc.ulasalle.edu.bo", "diego.zumelzu18@gmail.com", "rcsa@hotmail.com")
     for correo in correos:
         params = {"roomId": id_espacio, "personEmail": correo}
         resp = requests.post(url, headers=encabezado, json=params)
